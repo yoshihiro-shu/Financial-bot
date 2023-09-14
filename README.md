@@ -1,1 +1,1 @@
-# Financial-bot
+# financial-bot
