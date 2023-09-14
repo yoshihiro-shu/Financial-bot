@@ -32,6 +32,24 @@
 
 使用する技術やツール、ライブラリ、フレームワークについて記述します。
 
+## RDBS
+
+[POSTGRES](https://www.postgresql.org/)
+
+
+## Cache
+
+[etcd](https://etcd.io/)
+
+[etcd/client/v3](https://github.com/etcd-io/etcd/tree/main/client/v3)
+
+## Message Que
+
+[Appache Kafka](https://kafka.apache.org/)
+
+[sarama](https://github.com/IBM/sarama)
+
+
 # 7. インターフェース
 
 システムが提供するAPIや、外部システムとのインタフェースについての詳細を記述します。
