@@ -16,6 +16,8 @@
 
 システムの主要な目的や、達成すべきゴールを明記します。
 
+ユーザーが求める金融情報を提供し、金融リテラシーを高める。
+
 # 4. 要件
 
 ## 4.1 機能要件
@@ -67,13 +69,23 @@
 
 - [sarama](https://github.com/IBM/sarama)
 
-## API
-
-- [Line](https://developers.line.biz/ja/docs/messaging-api/building-bot/)
-
 # 7. インターフェース
 
 システムが提供するAPIや、外部システムとのインタフェースについての詳細を記述します。
+
+## Line API
+
+Line登録しているユーザーなどにニュースを送る。
+
+- [Line](https://developers.line.biz/ja/docs/messaging-api/building-bot/)
+
+## News取得API
+
+Comming Soon...
+
+## 銘柄取得API
+
+Comming Soon...
 
 # 8. 制約事項
 
