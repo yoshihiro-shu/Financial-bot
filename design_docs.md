@@ -35,17 +35,15 @@
 
 # 5. システムアーキテクチャ
 
-システムの大まかな構造や、主要なコンポーネント、それらの関係性を説明します。必要に応じて、図やダイアグラムを使用して説明します。
+## ニュース送信のフロー
+
+<img width="471" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/c0aecaf8-9126-4c3b-a194-acc5e6cc8083">
 
 ## 定期実行バッチ(CronJob)
 
 ニュースや銘柄などのデータ取得のバッチ
 
-<img width="807" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/50816f89-c1e0-4523-91b8-58a99e2a60f3">
-
-## ニュース送信のフロー
-
-<img width="471" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/c0aecaf8-9126-4c3b-a194-acc5e6cc8083">
+<img width="745" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/27a274ea-fc6e-4964-b895-be83e0f62f88">
 
 # 6. 主要な技術スタック
 
