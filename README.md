@@ -1,5 +1,5 @@
 # financial-bot
 
-## Design Doc
+## Design Docs
 
-[こちら](./design_doc.md)
+[こちら](./design_docs.md)
