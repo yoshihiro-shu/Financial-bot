@@ -39,11 +39,13 @@
 
 ## 定期実行バッチ(CronJob)
 
+ニュースや銘柄などのデータ取得のバッチ
+
 <img width="438" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/6e16c0e6-4dc9-4fdc-9480-c963fdc90c09">
 
-## 通知フロー
+## ニュース送信のフロー
 
-<img width="904" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/8201447c-285a-4acc-aed7-6b7209b76ff5">
+<img width="548" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/d595538b-a2b1-4760-8afc-56ccda6438d3">
 
 # 6. 主要な技術スタック
 
