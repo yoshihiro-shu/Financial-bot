@@ -43,23 +43,23 @@
 
 ## RDBS
 
-[Postgresql](https://www.postgresql.org/)
+- [Postgresql](https://www.postgresql.org/)
 
 ## Cache
 
-[etcd](https://etcd.io/)
+- [etcd](https://etcd.io/)
 
-[etcd/client/v3](https://github.com/etcd-io/etcd/tree/main/client/v3)
+- [etcd/client/v3](https://github.com/etcd-io/etcd/tree/main/client/v3)
 
 ## Message Que
 
-[Appache Kafka](https://kafka.apache.org/)
+- [Appache Kafka](https://kafka.apache.org/)
 
-[sarama](https://github.com/IBM/sarama)
+- [sarama](https://github.com/IBM/sarama)
 
 ## API
 
-[Line](https://developers.line.biz/ja/docs/messaging-api/building-bot/)
+- [Line](https://developers.line.biz/ja/docs/messaging-api/building-bot/)
 
 # 7. インターフェース
 
