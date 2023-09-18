@@ -36,7 +36,7 @@
 
 ### document
 
-[POSTGRES](https://www.postgresql.org/)
+[Postgresql](https://www.postgresql.org/)
 
 ## Cache
 
