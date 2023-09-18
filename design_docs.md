@@ -42,6 +42,7 @@
 <img width="438" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/6e16c0e6-4dc9-4fdc-9480-c963fdc90c09">
 
 ## 通知処理
+
 # 6. 主要な技術スタック
 
 使用する技術やツール、ライブラリ、フレームワークについて記述します。
