@@ -41,7 +41,9 @@
 
 <img width="438" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/6e16c0e6-4dc9-4fdc-9480-c963fdc90c09">
 
-## 通知処理
+## 通知フロー
+
+<img width="956" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/b4c0e351-d581-4c95-86b5-72ceff60a413">
 
 # 6. 主要な技術スタック
 
