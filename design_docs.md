@@ -43,7 +43,7 @@
 
 ニュースや銘柄などのデータ取得のバッチ
 
-<img width="721" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/b2d8c268-73ae-47e9-a877-d1c2a92d93aa">
+<img width="451" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/081fefbe-8560-4fb1-a948-bb2218e9cc59">
 
 # 6. 主要な技術スタック
 
