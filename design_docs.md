@@ -41,7 +41,7 @@
 
 ニュースや銘柄などのデータ取得のバッチ
 
-<img width="438" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/6e16c0e6-4dc9-4fdc-9480-c963fdc90c09">
+<img width="807" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/50816f89-c1e0-4523-91b8-58a99e2a60f3">
 
 ## ニュース送信のフロー
 
