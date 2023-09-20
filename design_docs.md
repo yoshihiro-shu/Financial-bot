@@ -87,6 +87,9 @@ Coming Soon...
 
 - [Yahoo Japan](https://news.yahoo.co.jp/rss)
 - [Google](https://support.google.com/googlenews/?hl=ja&visit_id=638308175180189562-3062086800#topic=7688381)
+  - https://rss.app/rss-feed/google-news-rss-feed
+  - https://g-tips.jp/google-news/how-to-get-google-news-rss/
+  - https://support.google.com/news/publisher-center/answer/9545414?hl=en
 
 # 8. 制約事項
 
