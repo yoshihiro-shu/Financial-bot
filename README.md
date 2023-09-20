@@ -1,5 +1,7 @@
 # financial-bot
 
+金融に関する情報をLine Botで定期的に送信するサービス
+
 ## Design Docs
 
 [こちら](./design_docs.md)
