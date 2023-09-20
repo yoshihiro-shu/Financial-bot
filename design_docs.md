@@ -89,6 +89,13 @@ Comming Soon...
 
 システムの設計や実装における制約や制限事項を明記します。
 
+### ディレクトリ構成
+
+以下の思想を参考に設計します。
+
+- [Standard Go Project Layout](https://github.com/golang-standards/project-layout/blob/master/README_ja.md)
+- [Domain-Driven Design](https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/best-practice-an-introduction-to-domain-driven-design)
+
 # 9. マイルストーンとタイムライン
 
 プロジェクトの主要なフェーズや、それぞれのフェーズの完了予定日を明記します。
