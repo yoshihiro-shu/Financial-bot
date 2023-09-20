@@ -77,15 +77,15 @@ Line登録しているユーザーなどにニュースを送る。
 
 - [Line](https://developers.line.biz/ja/docs/messaging-api/building-bot/)
 
-## News取得API
+## API
 
-## News取得RSS
+Coming Soon...
+
+## RSS
+
+### News
 
 - [Yahoo Japan](https://news.yahoo.co.jp/rss)
-
-## 銘柄取得API
-
-Comming Soon...
 
 # 8. 制約事項
 
