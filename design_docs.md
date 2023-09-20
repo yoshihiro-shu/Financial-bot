@@ -86,6 +86,7 @@ Coming Soon...
 ### News
 
 - [Yahoo Japan](https://news.yahoo.co.jp/rss)
+- [Google](https://support.google.com/googlenews/?hl=ja&visit_id=638308175180189562-3062086800#topic=7688381)
 
 # 8. 制約事項
 
