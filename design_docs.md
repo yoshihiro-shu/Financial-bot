@@ -79,7 +79,9 @@ Line登録しているユーザーなどにニュースを送る。
 
 ## News取得API
 
-Comming Soon...
+## News取得RSS
+
+- [Yahoo Japan](https://news.yahoo.co.jp/rss)
 
 ## 銘柄取得API
 
