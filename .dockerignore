@@ -5,6 +5,7 @@
 .tool-versions
 
 docs
+images
 tmp
 
 *.md
