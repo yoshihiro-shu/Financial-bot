@@ -4,7 +4,7 @@
 
 ## Design Docs
 
-[こちら](./design_docs.md)
+[こちら](./docs/design_docs.md)
 
 ## System Design
 

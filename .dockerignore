@@ -4,8 +4,8 @@
 
 .tool-versions
 
+docs
 tmp
 
 *.md
-
 LICENSE
