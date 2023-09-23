@@ -6,34 +6,13 @@
 
 [こちら](./docs/design_docs.md)
 
-## System Design
-
-[diagram](https://app.diagrams.net/?src=about#G1u6J3T5kn-cB-85117u00gpe_KJAJez7F)
-
-## ニュース送信のフロー
+## System Architecture
 
 <img width="432" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/7b2edc84-c5fc-4b24-9c29-79df19d40b97">
 
 ## 環境構築
 
-1. Docker Networkの作成
-
-    ```zsh
-    docker network create financial-bot-network
-    ```
-
-2. Docker Composeのビルド
-
-    ```zsh
-    docker compose up --build
-    ```
-
-3. レスポンスチェック
-
-    ```zsh
-    curl http://127.0.0.1:8080/
-    ```
-
+[こちら](./docs/setting_environment.md)
 
 ## ディレクトリ構成
 
