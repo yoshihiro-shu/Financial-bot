@@ -30,6 +30,12 @@
     brew install sqlc
     ```
 
+    generate the orm file
+
+    ```zsh
+    sqlc generate
+    ```
+
 2. Migrationツール
 
     [goose](https://github.com/pressly/goose)
@@ -38,7 +44,7 @@
     brew install goose
     ```
 
-    migration fileの生成方法
+    generate the migration file
 
     ```zsh
     goose --dir ./db/migrations create add_some_column sql
