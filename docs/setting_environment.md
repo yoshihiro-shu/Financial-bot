@@ -33,7 +33,7 @@
     generate the orm file
 
     ```zsh
-    sqlc generate
+    make gen-orm
     ```
 
 2. Migrationツール
@@ -47,8 +47,7 @@
     generate the migration file
 
     ```zsh
-    goose --dir ./db/migrations create add_some_column sql
-    Created new file: 20170506082420_add_some_column.sql
+    make gen-migration
     ```
 
 3. go-zero

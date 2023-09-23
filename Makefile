@@ -13,3 +13,11 @@ start:
 .PHONY: stop
 stop:
 	docker compose down
+
+.PHONY: gen-orm
+gen-orm:
+	sqlc -f ./sqlc/sqlc.yaml generate
+
+.PHONY: gen-migration
+gen-migration-file:
+	goose --dir ./db/migrations create CHANGE_ME sql
