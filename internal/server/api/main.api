@@ -1,0 +1,29 @@
+syntax = "v1"
+
+info (
+	title: "main api"
+	desc: "main api"
+	author: "yoshihiro-shu"
+	email: "yoihongzhu0321@gmail.com"
+)
+
+import "base.api"
+
+type (
+	BatchFinancialNewsReq  struct{}
+	BatchFinancialNewsResp struct{ *BaseResp }
+	BatchStockInfoReq      struct{}
+	BatchStockInfoResp     struct{ *BaseResp }
+)
+
+@server (
+	prefix: /v1
+	group:  batch
+)
+service batch {
+	@handler BatchFinancialNews
+	post /batch/financial-news (BatchFinancialNewsReq) returns (BatchFinancialNewsResp)
+
+	@handler BatchStockInfo
+	post /batch/stock-info (BatchStockInfoReq) returns (BatchStockInfoResp)
+}
