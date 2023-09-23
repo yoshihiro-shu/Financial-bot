@@ -1,0 +1,4 @@
+etcdCluster:
+  addr:
+    - etcd1:12379
+    - etcd2:22379
