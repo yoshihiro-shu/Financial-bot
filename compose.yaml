@@ -2,7 +2,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: ./images/Dockerfile.dev
     volumes:
       - .:/usr/src/app
     ports:
