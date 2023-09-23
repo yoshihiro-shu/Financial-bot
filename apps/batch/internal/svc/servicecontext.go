@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/config"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/config"
 )
 
 type ServiceContext struct {

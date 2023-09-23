@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/config"
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/handler"
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/svc"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/config"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/handler"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

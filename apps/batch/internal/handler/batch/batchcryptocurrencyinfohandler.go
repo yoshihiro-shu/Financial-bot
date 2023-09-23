@@ -3,9 +3,9 @@ package batch
 import (
 	"net/http"
 
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/logic/batch"
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/svc"
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/types"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/logic/batch"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/svc"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

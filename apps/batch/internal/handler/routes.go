@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	batch "github.com/yoshihiro-shu/financial-bot/internal/server/internal/handler/batch"
-	"github.com/yoshihiro-shu/financial-bot/internal/server/internal/svc"
+	batch "github.com/yoshihiro-shu/financial-bot/apps/batch/internal/handler/batch"
+	"github.com/yoshihiro-shu/financial-bot/apps/batch/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
