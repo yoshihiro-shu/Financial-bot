@@ -50,3 +50,17 @@
     goose --dir ./db/migrations create add_some_column sql
     Created new file: 20170506082420_add_some_column.sql
     ```
+
+3. go-zero
+
+    generate template `.api`file
+
+    ```zsh
+    goctl api -o internal/server/api/some.api
+    ```
+
+    generate go file by `.api`file
+
+    ```zsh
+    goctl api go -api internal/server/api/main.api -dir internal/server
+    ```
