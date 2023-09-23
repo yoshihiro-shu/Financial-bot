@@ -114,6 +114,7 @@ project-name/
 ├── configs/              # 設定ファイル
 ├── deployments/          # KubernetesやDockerのデプロイメント設定
 ├── docs/                 # ドキュメント
+├── images/               # Dockerfile
 ├── internal/             # 内部パッケージ
 │   ├── app/              # アプリケーションロジック
 │   ├── dao/              # データアクセスオブジェクト (DAO)
@@ -126,7 +127,6 @@ project-name/
 ├── third_party/          # サードパーティのユーティリティ
 ├── web/                  # Webサーバと関連ファイル
 ├── .gitignore            # git ignoreファイル
-├── Dockerfile            # Dockerfile
 ├── Makefile              # ビルド、テスト、デプロイメントを自動化するためのMakefile
 ├── README.md             # プロジェクトのREADME
 └── go.mod                # Goのモジュール依存関係
