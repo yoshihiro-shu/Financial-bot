@@ -23,6 +23,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/batch/stock-info",
 				Handler: batch.BatchStockInfoHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/batch/cypto-currency-info",
+				Handler: batch.BatchCryptoCurrencyInfoHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/v1"),
 	)

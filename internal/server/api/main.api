@@ -10,11 +10,22 @@ info (
 import "base.api"
 
 type (
-	BatchFinancialNewsReq  struct{}
-	BatchFinancialNewsResp struct{ *BaseResp }
-	BatchStockInfoReq      struct{}
-	BatchStockInfoResp     struct{ *BaseResp }
+	BatchFinancialNewsReq   struct{}
+	BatchFinancialNewsResp  struct{ *BaseResp }
+	BatchStockInfoReq       struct{}
+	BatchStockInfoResp      struct{ *BaseResp }
+	BatchCryptoCurrencyReq  struct{}
+	BatchCryptoCurrencyResp struct{ *BaseResp }
 )
+
+// type (
+// 	NotificationFinancialNewsReq   struct{}
+// 	NotificationFinancialNewsResp  struct{ *BaseResp }
+// 	NotificationStockInfoReq       struct{}
+// 	NotificationStockInfoResp      struct{ *BaseResp }
+// 	NotificationCryptoCurrencyInfoReq  struct{}
+// 	NotificationCryptoCurrencyInfoResp struct{ *BaseResp }
+// )
 
 @server (
 	prefix: /v1
@@ -26,4 +37,22 @@ service batch {
 
 	@handler BatchStockInfo
 	post /batch/stock-info (BatchStockInfoReq) returns (BatchStockInfoResp)
+
+	@handler BatchCryptoCurrencyInfo
+	post /batch/cypto-currency-info (BatchCryptoCurrencyReq) returns (BatchCryptoCurrencyResp)
 }
+
+// @server (
+// 	prefix: /v1
+// 	group: notification
+// )
+// service notification {
+// 	@handler NotificationFinancialNews
+// 	post /notification/financial-news (NotificationFinancialNewsReq) returns (NotificationFinancialNewsResp)
+
+// 	@handler NotificationStockInfo
+// 	post /notification/stock-info (NotificationStockInfoReq) returns (NotificationStockInfoResp)
+
+// 	@handler NotificationCryptoCurrencyInfo
+// 	post /notification/cypto-currency-info (NotificationCryptoCurrencyInfoReq) returns (NotificationCryptoCurrencyInfoResp)
+// }

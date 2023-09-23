@@ -15,6 +15,16 @@ type BatchStockInfoResp struct {
 	*BaseResp
 }
 
+type BatchCryptoCurrencyReq struct {
+}
+
+type BatchCryptoCurrencyResp struct {
+	*BaseResp
+}
+
+type BaseReq struct {
+}
+
 type BaseResp struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`
