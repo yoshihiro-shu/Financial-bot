@@ -24,10 +24,8 @@
 
 - **機能1**: 一日最大三件の重要な金融ニュースの通知
 - **機能2**: その日の最もイケてる株,FX,投資信託,暗号資産などの銘柄の情報の通知
-- **機能3**: 金融ニュース収集バッチ機能
-- **機能4**: 株,FX,投資信託,暗号資産収集バッチ機能
-- **機能5**: 株などのシミュレーション機能
-- **機能6**: アフィリエイト広告
+- **機能3**: 株などのシミュレーション機能
+- **機能4**: アフィリエイト広告
 
 ## 4.2 非機能要件
 
@@ -56,6 +54,10 @@
 ### RDBS
 
 - [Postgresql](https://www.postgresql.org/)
+
+- [sqlc](https://docs.sqlc.dev/en/stable/tutorials/getting-started-postgresql.html)
+
+- [goose](https://github.com/pressly/goose)
 
 ### Cache
 
