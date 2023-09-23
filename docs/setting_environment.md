@@ -37,3 +37,10 @@
     ```zsh
     brew install goose
     ```
+
+    migration fileの生成方法
+
+    ```zsh
+    goose create ./db/migrations/add_some_column sql
+    Created new file: 20170506082420_add_some_column.sql
+    ```
