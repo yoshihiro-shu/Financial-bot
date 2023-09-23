@@ -13,6 +13,7 @@ services:
     depends_on:
       - etcd1
       - etcd2
+      - postgres
 
   etcd1:
     image: bitnami/etcd:3.5.9
@@ -53,6 +54,27 @@ services:
       - ./tmp/etcd2:/bitnami/etcd
     ports:
       - 22379:22379
+    networks:
+      - financial-bot-network
+
+  postgres:
+    image: postgres:16.0
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - PGUSER=postgres
+      - TZ=Asia/Tokyo
+    ports:
+      - 5432:5432
+    volumes:
+      - ./tmp/postgresql/data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-q", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      interval: 1s
+      timeout: 1s
+      retries: 5
     networks:
       - financial-bot-network
 
