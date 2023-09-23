@@ -1,0 +1,11 @@
+.git
+.github
+.gitignore
+
+.tool-versions
+
+tmp
+
+*.md
+
+LICENSE
