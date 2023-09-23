@@ -19,7 +19,7 @@
 1. Docker Networkの作成
 
     ```zsh
-    docker network create financial-bot
+    docker network create financial-bot-network
     ```
 
 2. Docker Composeのビルド

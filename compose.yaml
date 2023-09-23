@@ -9,7 +9,7 @@ services:
       - "8080:8080"
     tty: true
     networks:
-      - financial-bot
+      - financial-bot-network
     depends_on:
       - etcd1
       - etcd2
@@ -33,7 +33,7 @@ services:
     ports:
       - 12379:12379
     networks:
-      - financial-bot
+      - financial-bot-network
 
   etcd2:
     image: bitnami/etcd:3.5.9
@@ -49,14 +49,13 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
       - ETCD_ROOT_PASSWORD=""
       # - ALLOW_NONE_AUTHENTICATION=yes
-
     volumes:
       - ./tmp/etcd2:/bitnami/etcd
     ports:
       - 22379:22379
     networks:
-      - financial-bot
+      - financial-bot-network
 
 networks:
-  financial-bot:
+  financial-bot-network:
     driver: bridge
