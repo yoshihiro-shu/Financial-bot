@@ -83,7 +83,7 @@ Line登録しているユーザーなどにニュースを送る。
 
 ### API
 
-Coming Soon...
+- [News API](https://newsapi.org/)
 
 ### RSS
 
