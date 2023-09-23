@@ -109,7 +109,6 @@ Line登録しているユーザーなどにニュースを送る。
 ```zsh
 project-name/
 ├── api/                  # API定義とプロトコルファイル
-├── assets/               # 画像、CSS、JavaScriptファイルなどのアセット
 ├── build/                # ビルドとデプロイのスクリプト
 ├── cmd/                  # プロジェクトのエントリーポイント (main.goファイル)
 ├── configs/              # 設定ファイル

@@ -8,16 +8,17 @@ print_env:
 
 .PHONY: start
 start:
-	docker compose up
+	sh ./script/docker-compose-up.sh
 
 .PHONY: stop
 stop:
-	docker compose down
+	sh ./script/docker-compose-down.sh
 
 .PHONY: gen-orm
 gen-orm:
-	sqlc -f ./sqlc/sqlc.yaml generate
+	sh ./script/gen-orm.sh
 
 .PHONY: gen-migration
-gen-migration-file:
-	goose --dir ./db/migrations create CHANGE_ME sql
+gen-migration:
+	sh ./script/gen-migration.sh
+
