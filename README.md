@@ -13,34 +13,3 @@
 ## 環境構築
 
 [こちら](./docs/setting_environment.md)
-
-## ディレクトリ構成
-
-### 基本構造
-
-```zsh
-project-name/
-├── api/                  # API定義とプロトコルファイル
-├── assets/               # 画像、CSS、JavaScriptファイルなどのアセット
-├── build/                # ビルドとデプロイのスクリプト
-├── cmd/                  # プロジェクトのエントリーポイント (main.goファイル)
-├── configs/              # 設定ファイル
-├── deployments/          # KubernetesやDockerのデプロイメント設定
-├── docs/                 # ドキュメント
-├── internal/             # 内部パッケージ
-│   ├── app/              # アプリケーションロジック
-│   ├── dao/              # データアクセスオブジェクト (DAO)
-│   ├── middleware/       # ミドルウェア
-│   ├── model/            # データモデル
-│   └── service/          # サービスレイヤ
-├── pkg/                  # 外部で利用可能なライブラリやパッケージ
-├── scripts/              # スクリプト (データベースマイグレーション、セットアップスクリプトなど)
-├── test/                 # 追加の外部テストアプリケーションとテストデータ
-├── third_party/          # サードパーティのユーティリティ
-├── web/                  # Webサーバと関連ファイル
-├── .gitignore            # git ignoreファイル
-├── Dockerfile            # Dockerfile
-├── Makefile              # ビルド、テスト、デプロイメントを自動化するためのMakefile
-├── README.md             # プロジェクトのREADME
-└── go.mod                # Goのモジュール依存関係
-```
