@@ -1,0 +1,62 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8080:8080"
+    tty: true
+    networks:
+      - financial-bot
+    depends_on:
+      - etcd1
+      - etcd2
+
+  etcd1:
+    image: bitnami/etcd:3.5.9
+    restart: always
+    environment:
+      - ETCD_NAME=etcd1
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd1:12380
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:12380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:12379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd1:12379
+      - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:12380,etcd2=http://etcd2:22380
+      - ETCD_INITIAL_CLUSTER_TIMEOUT=5000
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_ROOT_PASSWORD=""
+      # - ALLOW_NONE_AUTHENTICATION=yes
+    volumes:
+      - ./tmp/etcd1:/bitnami/etcd
+    ports:
+      - 12379:12379
+    networks:
+      - financial-bot
+
+  etcd2:
+    image: bitnami/etcd:3.5.9
+    restart: always
+    environment:
+      - ETCD_NAME=etcd2
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd2:22380
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:22380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:22379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd2:22379
+      - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:12380,etcd2=http://etcd2:22380
+      - ETCD_INITIAL_CLUSTER_TIMEOUT=5000
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_ROOT_PASSWORD=""
+      # - ALLOW_NONE_AUTHENTICATION=yes
+
+    volumes:
+      - ./tmp/etcd2:/bitnami/etcd
+    ports:
+      - 22379:22379
+    networks:
+      - financial-bot
+
+networks:
+  financial-bot:
+    driver: bridge
