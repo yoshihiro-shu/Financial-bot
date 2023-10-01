@@ -55,11 +55,11 @@
     generate template `.api`file
 
     ```zsh
-    goctl api -o internal/server/api/some.api
+    goctl api -o apps/some/main.api
     ```
 
     generate go file by `.api`file
 
     ```zsh
-    goctl api go -api internal/server/api/main.api -dir internal/server
+    goctl api go -api apps/some/main.api -dir apps/some
     ```
