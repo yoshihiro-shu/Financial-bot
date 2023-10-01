@@ -30,7 +30,7 @@ func (l *HealthCheckLogic) HealthCheck(req *types.BatchFinancialNewsReq) (resp *
 	return &types.BatchFinancialNewsResp{
 		BaseResp: &types.BaseResp{
 			Code: http.StatusOK,
-			Msg:  "OK",
+			Msg:  "Batch Group OK",
 		},
 	}, nil
 }

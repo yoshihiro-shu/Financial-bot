@@ -30,12 +30,12 @@ type (
 // )
 
 @server (
-	prefix: /v1
+	prefix: /api/v1
 	group:  batch
 )
 service batch {
 	@handler HealthCheck
-	post /batch/health-check (BatchFinancialNewsReq) returns (BatchFinancialNewsResp)
+	get /batch/health-check (BatchFinancialNewsReq) returns (BatchFinancialNewsResp)
 
 	@handler BatchFinancialNews
 	post /batch/financial-news (BatchFinancialNewsReq) returns (BatchFinancialNewsResp)

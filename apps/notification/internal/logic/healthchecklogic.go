@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"net/http"
 
 	"github.com/yoshihiro-shu/financial-bot/apps/notification/internal/svc"
 	"github.com/yoshihiro-shu/financial-bot/apps/notification/internal/types"
@@ -24,7 +25,7 @@ func NewHealthCheckLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Healt
 }
 
 func (l *HealthCheckLogic) HealthCheck(req *types.HealtCheckReq) (resp *types.HealtCheckResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.HealtCheckResp{
+		Code: http.StatusOK,
+	}, nil
 }
