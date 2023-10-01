@@ -10,6 +10,8 @@ info (
 import "base.api"
 
 type (
+	BatchHealthCheckReq     struct{}
+	BatchHealthCheckResq    struct{ *BaseResp }
 	BatchFinancialNewsReq   struct{}
 	BatchFinancialNewsResp  struct{ *BaseResp }
 	BatchStockInfoReq       struct{}
@@ -32,6 +34,9 @@ type (
 	group:  batch
 )
 service batch {
+	@handler HealthCheck
+	post /batch/health-check (BatchFinancialNewsReq) returns (BatchFinancialNewsResp)
+
 	@handler BatchFinancialNews
 	post /batch/financial-news (BatchFinancialNewsReq) returns (BatchFinancialNewsResp)
 

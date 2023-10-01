@@ -15,6 +15,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
+				Path:    "/batch/health-check",
+				Handler: batch.HealthCheckHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
 				Path:    "/batch/financial-news",
 				Handler: batch.BatchFinancialNewsHandler(serverCtx),
 			},
