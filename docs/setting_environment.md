@@ -11,13 +11,21 @@
 2. Docker Composeのビルド
 
     ```zsh
-    docker compose up --build
+    docker compose build
+    docker compose -f compose-apps.yaml build
     ```
 
-3. レスポンスチェック
+3. Docker Composeのスタート
 
     ```zsh
-    curl http://127.0.0.1:8080/
+    make start
+    ```
+
+4. レスポンスチェック
+
+    ```zsh
+    curl http://127.0.0.1:80/api/v1/batch/health-check
+    curl http://127.0.0.1:80/api/v1/notification/health-check
     ```
 
 ## Tool Install
