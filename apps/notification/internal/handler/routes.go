@@ -14,7 +14,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/health-check",
+				Path:    "/api/v1/notification/health-check",
 				Handler: HealthCheckHandler(serverCtx),
 			},
 		},

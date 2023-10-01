@@ -39,7 +39,7 @@ type HealtCheckResp {
 
 service notification {
 	@handler HealthCheckHandler
-	get /api/v1/health-check(HealtCheckReq) returns (HealtCheckResp);
+	get /api/v1/notification/health-check(HealtCheckReq) returns (HealtCheckResp);
 }
 
 @server (

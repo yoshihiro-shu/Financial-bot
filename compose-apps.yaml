@@ -7,6 +7,7 @@ services:
       - "80:80"
     depends_on:
       - batch-server # does not work
+      - notification-server # does not work
     networks:
       - financial-bot-network
 
@@ -22,6 +23,21 @@ services:
       - ./internal:/usr/src/app/internal
     ports:
       - "8000:8000"
+    tty: true
+    networks:
+      - financial-bot-network
+
+  notification-server:
+    build:
+      context: .
+      dockerfile: ./images/dev/apps/notification/Dockerfile
+    volumes:
+      # - ./go.mod:/user/src/app/go.mod
+      # - ./go.sum:/user/src/app/go.sum
+      - ./apps/notification:/usr/src/app/apps/notification
+      - ./internal:/usr/src/app/internal
+    ports:
+      - "8001:8001"
     tty: true
     networks:
       - financial-bot-network
