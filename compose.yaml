@@ -6,8 +6,8 @@ services:
     volumes:
       # - ./go.mod:/user/src/app/go.mod
       # - ./go.sum:/user/src/app/go.sum
-      # - ./apps/batch:/usr/src/app/batch
-      - .:/usr/src/app
+      - ./apps/batch:/usr/src/app/apps/batch
+      - ./internal:/usr/src/app/internal
     ports:
       - "8000:8000"
     tty: true

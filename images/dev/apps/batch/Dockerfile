@@ -5,8 +5,13 @@ WORKDIR ${ROOT}
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 
-COPY . .
-RUN go mod tidy
+COPY go.mod ./go.mod
+COPY go.sum ./go.sum
+
+RUN go mod download
+
+COPY apps/batch ./apps/batch
+COPY internal ./internal
 
 EXPOSE 8000
 
