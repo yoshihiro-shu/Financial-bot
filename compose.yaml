@@ -1,23 +1,4 @@
 services:
-  batch-server:
-    build:
-      context: .
-      dockerfile: ./images/dev/apps/batch/Dockerfile
-    volumes:
-      # - ./go.mod:/user/src/app/go.mod
-      # - ./go.sum:/user/src/app/go.sum
-      - ./apps/batch:/usr/src/app/apps/batch
-      - ./internal:/usr/src/app/internal
-    ports:
-      - "8000:8000"
-    tty: true
-    networks:
-      - financial-bot-network
-    depends_on:
-      - etcd1
-      - etcd2
-      - postgres
-      - migration
 
   etcd1:
     image: bitnami/etcd:3.5.9
@@ -101,4 +82,5 @@ services:
 
 networks:
   financial-bot-network:
+    external: true
     driver: bridge

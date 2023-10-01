@@ -1,2 +1,3 @@
 #!/bin/bash
-docker compose up
+docker compose up -d
+docker compose -f compose-apps.yaml up
