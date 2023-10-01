@@ -1,12 +1,15 @@
 services:
-  server:
+  batch-server:
     build:
       context: .
-      dockerfile: ./images/dev/server/Dockerfile
+      dockerfile: ./images/dev/apps/batch/Dockerfile
     volumes:
+      # - ./go.mod:/user/src/app/go.mod
+      # - ./go.sum:/user/src/app/go.sum
+      # - ./apps/batch:/usr/src/app/batch
       - .:/usr/src/app
     ports:
-      - "8080:8080"
+      - "8000:8000"
     tty: true
     networks:
       - financial-bot-network
