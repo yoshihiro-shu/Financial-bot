@@ -6,7 +6,7 @@ import (
 	"github.com/yoshihiro-shu/financial-bot/internal/notification"
 )
 
-const accessToken = "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+const accessToken = "inORb1lJ64ajtqaGh12s3UoaZgnmv1eWMZL2o4x4ucN"
 
 func TestSendMsg(t *testing.T) {
 	client := notification.NewNotification(accessToken)
