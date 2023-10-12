@@ -13,9 +13,9 @@ import (
 
 const createNews = `-- name: CreateNews :one
 INSERT INTO news (
-  title, description, link, thumbnail, score, published_at
+  title, description, link, thumbnail, score, published_at, provider_id, category_id
 ) VALUES (
-  $1, $2, $3, $4, $5, $6
+  $1, $2, $3, $4, $5, $6, $7, $8
 )
 RETURNING id, title, description, link, thumbnail, score, published_at, created_at, udpated_at, provider_id, category_id
 `
@@ -27,6 +27,8 @@ type CreateNewsParams struct {
 	Thumbnail   sql.NullString `db:"thumbnail"`
 	Score       int32          `db:"score"`
 	PublishedAt time.Time      `db:"published_at"`
+	ProviderID  sql.NullInt32  `db:"provider_id"`
+	CategoryID  sql.NullInt32  `db:"category_id"`
 }
 
 func (q *Queries) CreateNews(ctx context.Context, arg CreateNewsParams) (News, error) {
@@ -37,6 +39,8 @@ func (q *Queries) CreateNews(ctx context.Context, arg CreateNewsParams) (News, e
 		arg.Thumbnail,
 		arg.Score,
 		arg.PublishedAt,
+		arg.ProviderID,
+		arg.CategoryID,
 	)
 	var i News
 	err := row.Scan(
