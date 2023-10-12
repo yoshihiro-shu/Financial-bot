@@ -9,6 +9,13 @@ import (
 	"time"
 )
 
+type Categories struct {
+	ID        int32     `db:"id"`
+	Name      string    `db:"name"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
+}
+
 type News struct {
 	ID          int32          `db:"id"`
 	Title       string         `db:"title"`
@@ -19,4 +26,13 @@ type News struct {
 	PublishedAt time.Time      `db:"published_at"`
 	CreatedAt   time.Time      `db:"created_at"`
 	UdpatedAt   time.Time      `db:"udpated_at"`
+	ProviderID  sql.NullInt32  `db:"provider_id"`
+	CategoryID  sql.NullInt32  `db:"category_id"`
+}
+
+type Providers struct {
+	ID        int32     `db:"id"`
+	Name      string    `db:"name"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
 }
