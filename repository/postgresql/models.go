@@ -10,10 +10,10 @@ import (
 )
 
 type News struct {
-	ID          int32          `json:"id"`
-	Title       string         `json:"title"`
-	Description sql.NullString `json:"description"`
-	Link        string         `json:"link"`
-	Thumbnail   sql.NullString `json:"thumbnail"`
-	PublishedAt time.Time      `json:"published_at"`
+	ID          int32          `db:"id"`
+	Title       string         `db:"title"`
+	Description sql.NullString `db:"description"`
+	Link        string         `db:"link"`
+	Thumbnail   sql.NullString `db:"thumbnail"`
+	PublishedAt time.Time      `db:"published_at"`
 }

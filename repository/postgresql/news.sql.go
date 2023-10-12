@@ -20,9 +20,9 @@ RETURNING id, title, description, link, thumbnail, published_at
 `
 
 type CreateNewsParams struct {
-	Title       string    `json:"title"`
-	Link        string    `json:"link"`
-	PublishedAt time.Time `json:"published_at"`
+	Title       string    `db:"title"`
+	Link        string    `db:"link"`
+	PublishedAt time.Time `db:"published_at"`
 }
 
 func (q *Queries) CreateNews(ctx context.Context, arg CreateNewsParams) (News, error) {
