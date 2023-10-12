@@ -25,7 +25,7 @@ type News struct {
 	Score       int32          `db:"score"`
 	PublishedAt time.Time      `db:"published_at"`
 	CreatedAt   time.Time      `db:"created_at"`
-	UdpatedAt   time.Time      `db:"udpated_at"`
+	UpdatedAt   time.Time      `db:"updated_at"`
 	ProviderID  sql.NullInt32  `db:"provider_id"`
 	CategoryID  sql.NullInt32  `db:"category_id"`
 }

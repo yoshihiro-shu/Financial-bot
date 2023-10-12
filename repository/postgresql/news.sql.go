@@ -17,7 +17,7 @@ INSERT INTO news (
 ) VALUES (
   $1, $2, $3, $4, $5, $6, $7, $8
 )
-RETURNING id, title, description, link, thumbnail, score, published_at, created_at, udpated_at, provider_id, category_id
+RETURNING id, title, description, link, thumbnail, score, published_at, created_at, updated_at, provider_id, category_id
 `
 
 type CreateNewsParams struct {
@@ -52,7 +52,7 @@ func (q *Queries) CreateNews(ctx context.Context, arg CreateNewsParams) (News, e
 		&i.Score,
 		&i.PublishedAt,
 		&i.CreatedAt,
-		&i.UdpatedAt,
+		&i.UpdatedAt,
 		&i.ProviderID,
 		&i.CategoryID,
 	)
@@ -70,7 +70,7 @@ func (q *Queries) DeleteNews(ctx context.Context, id int32) error {
 }
 
 const getNews = `-- name: GetNews :one
-SELECT id, title, description, link, thumbnail, score, published_at, created_at, udpated_at, provider_id, category_id FROM news
+SELECT id, title, description, link, thumbnail, score, published_at, created_at, updated_at, provider_id, category_id FROM news
 WHERE id = $1 LIMIT 1
 `
 
@@ -86,7 +86,7 @@ func (q *Queries) GetNews(ctx context.Context, id int32) (News, error) {
 		&i.Score,
 		&i.PublishedAt,
 		&i.CreatedAt,
-		&i.UdpatedAt,
+		&i.UpdatedAt,
 		&i.ProviderID,
 		&i.CategoryID,
 	)
@@ -94,7 +94,7 @@ func (q *Queries) GetNews(ctx context.Context, id int32) (News, error) {
 }
 
 const listNews = `-- name: ListNews :many
-SELECT id, title, description, link, thumbnail, score, published_at, created_at, udpated_at, provider_id, category_id FROM news
+SELECT id, title, description, link, thumbnail, score, published_at, created_at, updated_at, provider_id, category_id FROM news
 ORDER BY published_at
 `
 
@@ -116,7 +116,7 @@ func (q *Queries) ListNews(ctx context.Context) ([]News, error) {
 			&i.Score,
 			&i.PublishedAt,
 			&i.CreatedAt,
-			&i.UdpatedAt,
+			&i.UpdatedAt,
 			&i.ProviderID,
 			&i.CategoryID,
 		); err != nil {
