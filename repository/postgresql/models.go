@@ -15,5 +15,8 @@ type News struct {
 	Description sql.NullString `db:"description"`
 	Link        string         `db:"link"`
 	Thumbnail   sql.NullString `db:"thumbnail"`
+	Score       int32          `db:"score"`
 	PublishedAt time.Time      `db:"published_at"`
+	CreatedAt   time.Time      `db:"created_at"`
+	UdpatedAt   time.Time      `db:"udpated_at"`
 }

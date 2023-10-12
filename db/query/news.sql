@@ -8,9 +8,9 @@ ORDER BY published_at;
 
 -- name: CreateNews :one
 INSERT INTO news (
-  title, link, published_at
+  title, description, link, thumbnail, score, published_at
 ) VALUES (
-  $1, $2, $3
+  $1, $2, $3, $4, $5, $6
 )
 RETURNING *;
 

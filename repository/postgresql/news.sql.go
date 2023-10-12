@@ -7,26 +7,37 @@ package postgresql
 
 import (
 	"context"
+	"database/sql"
 	"time"
 )
 
 const createNews = `-- name: CreateNews :one
 INSERT INTO news (
-  title, link, published_at
+  title, description, link, thumbnail, score, published_at
 ) VALUES (
-  $1, $2, $3
+  $1, $2, $3, $4, $5, $6
 )
-RETURNING id, title, description, link, thumbnail, published_at
+RETURNING id, title, description, link, thumbnail, score, published_at, created_at, udpated_at
 `
 
 type CreateNewsParams struct {
-	Title       string    `db:"title"`
-	Link        string    `db:"link"`
-	PublishedAt time.Time `db:"published_at"`
+	Title       string         `db:"title"`
+	Description sql.NullString `db:"description"`
+	Link        string         `db:"link"`
+	Thumbnail   sql.NullString `db:"thumbnail"`
+	Score       int32          `db:"score"`
+	PublishedAt time.Time      `db:"published_at"`
 }
 
 func (q *Queries) CreateNews(ctx context.Context, arg CreateNewsParams) (News, error) {
-	row := q.db.QueryRowContext(ctx, createNews, arg.Title, arg.Link, arg.PublishedAt)
+	row := q.db.QueryRowContext(ctx, createNews,
+		arg.Title,
+		arg.Description,
+		arg.Link,
+		arg.Thumbnail,
+		arg.Score,
+		arg.PublishedAt,
+	)
 	var i News
 	err := row.Scan(
 		&i.ID,
@@ -34,7 +45,10 @@ func (q *Queries) CreateNews(ctx context.Context, arg CreateNewsParams) (News, e
 		&i.Description,
 		&i.Link,
 		&i.Thumbnail,
+		&i.Score,
 		&i.PublishedAt,
+		&i.CreatedAt,
+		&i.UdpatedAt,
 	)
 	return i, err
 }
@@ -50,7 +64,7 @@ func (q *Queries) DeleteNews(ctx context.Context, id int32) error {
 }
 
 const getNews = `-- name: GetNews :one
-SELECT id, title, description, link, thumbnail, published_at FROM news
+SELECT id, title, description, link, thumbnail, score, published_at, created_at, udpated_at FROM news
 WHERE id = $1 LIMIT 1
 `
 
@@ -63,13 +77,16 @@ func (q *Queries) GetNews(ctx context.Context, id int32) (News, error) {
 		&i.Description,
 		&i.Link,
 		&i.Thumbnail,
+		&i.Score,
 		&i.PublishedAt,
+		&i.CreatedAt,
+		&i.UdpatedAt,
 	)
 	return i, err
 }
 
 const listNews = `-- name: ListNews :many
-SELECT id, title, description, link, thumbnail, published_at FROM news
+SELECT id, title, description, link, thumbnail, score, published_at, created_at, udpated_at FROM news
 ORDER BY published_at
 `
 
@@ -88,7 +105,10 @@ func (q *Queries) ListNews(ctx context.Context) ([]News, error) {
 			&i.Description,
 			&i.Link,
 			&i.Thumbnail,
+			&i.Score,
 			&i.PublishedAt,
+			&i.CreatedAt,
+			&i.UdpatedAt,
 		); err != nil {
 			return nil, err
 		}
