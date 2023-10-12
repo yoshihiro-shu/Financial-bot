@@ -3,7 +3,7 @@
 //   sqlc v1.21.0
 // source: news.sql
 
-package model
+package postgresql
 
 import (
 	"context"
