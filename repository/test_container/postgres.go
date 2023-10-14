@@ -22,17 +22,9 @@ var Postgres *postgresDBContainer
 func init() {
 	ctx := context.Background()
 
-	psql, err := StartPostgresContainer(ctx)
+	psql, err := NewPostgresDBContainer(ctx)
 	if err != nil {
 		log.Fatalf("failed to start container: %s", err)
-	}
-	err = psql.InitMigration(ctx)
-	if err != nil {
-		log.Fatalf("failed to init migration: %s", err)
-	}
-	err = psql.InitTestData(ctx)
-	if err != nil {
-		log.Fatalf("failed to init test data: %s", err)
 	}
 	Postgres = psql
 }
@@ -40,6 +32,16 @@ func init() {
 type postgresDBContainer struct {
 	testcontainers.Container
 	URI string
+}
+
+func NewPostgresDBContainer(ctx context.Context) (*postgresDBContainer, error) {
+	c, err := StartPostgresContainer(ctx)
+	if err != nil {
+		return nil, err
+	}
+	c.InitMigration(ctx)
+	c.InitTestData(ctx)
+	return c, nil
 }
 
 func StartPostgresContainer(ctx context.Context) (*postgresDBContainer, error) {
