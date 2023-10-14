@@ -17,6 +17,26 @@ import (
 const migrationsDir = "/db/migrations"
 const testDataSQLPath = "/db/test/init.sql"
 
+var Postgres *postgresDBContainer
+
+func init() {
+	ctx := context.Background()
+
+	psql, err := StartPostgresContainer(ctx)
+	if err != nil {
+		log.Fatalf("failed to start container: %s", err)
+	}
+	err = psql.InitMigration(ctx)
+	if err != nil {
+		log.Fatalf("failed to init migration: %s", err)
+	}
+	err = psql.InitTestData(ctx)
+	if err != nil {
+		log.Fatalf("failed to init test data: %s", err)
+	}
+	Postgres = psql
+}
+
 type postgresDBContainer struct {
 	testcontainers.Container
 	URI string

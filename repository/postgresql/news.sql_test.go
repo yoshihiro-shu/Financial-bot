@@ -14,25 +14,12 @@ import (
 
 func TestGetNews(t *testing.T) {
 	ctx := context.Background()
-	container, err := test_container.StartPostgresContainer(ctx)
-	if err != nil {
-		t.Errorf("error is %s", err)
-	}
+	container := test_container.Postgres
 	t.Cleanup(func() {
 		if err := container.Terminate(ctx); err != nil {
 			t.Errorf("failed to terminate container: %s", err)
 		}
 	})
-
-	err = container.InitMigration(ctx)
-	if err != nil {
-		t.Errorf("error is %s", err)
-	}
-
-	err = container.InitTestData(ctx)
-	if err != nil {
-		t.Errorf("error is %s", err)
-	}
 
 	db, err := sql.Open("postgres", container.URI)
 	if err != nil {
