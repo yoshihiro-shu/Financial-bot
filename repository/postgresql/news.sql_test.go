@@ -3,11 +3,10 @@ package postgresql_test
 import (
 	"context"
 	"database/sql"
-	"log"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/yoshihiro-shu/financial-bot/internal/testutils"
 	"github.com/yoshihiro-shu/financial-bot/repository/postgresql"
 	"github.com/yoshihiro-shu/financial-bot/repository/test_container"
 )
@@ -42,7 +41,7 @@ func TestGetNews(t *testing.T) {
 				Link:        "News Link 1",
 				Thumbnail:   sql.NullString{String: "News Thumbnail 1", Valid: true},
 				Score:       100,
-				PublishedAt: parseTime("2023-10-13 12:00:00 +0900"),
+				PublishedAt: testutils.ParseUnixTime("2023-10-13 12:00:00 +0900"),
 				ProviderID:  sql.NullInt32{Int32: 1, Valid: true},
 				CategoryID:  sql.NullInt32{Int32: 1, Valid: true},
 			},
@@ -57,7 +56,7 @@ func TestGetNews(t *testing.T) {
 				Link:        "News Link 2",
 				Thumbnail:   sql.NullString{String: "News Thumbnail 2", Valid: true},
 				Score:       90,
-				PublishedAt: parseTime("2023-10-13 12:00:00 +0900"),
+				PublishedAt: testutils.ParseUnixTime("2023-10-13 12:00:00 +0900"),
 				ProviderID:  sql.NullInt32{Int32: 2, Valid: true},
 				CategoryID:  sql.NullInt32{Int32: 2, Valid: true},
 			},
@@ -72,7 +71,7 @@ func TestGetNews(t *testing.T) {
 				Link:        "News Link 3",
 				Thumbnail:   sql.NullString{String: "News Thumbnail 3", Valid: true},
 				Score:       80,
-				PublishedAt: parseTime("2023-10-13 12:00:00 +0900"),
+				PublishedAt: testutils.ParseUnixTime("2023-10-13 12:00:00 +0900"),
 				ProviderID:  sql.NullInt32{Int32: 3, Valid: true},
 				CategoryID:  sql.NullInt32{Int32: 3, Valid: true},
 			},
@@ -98,18 +97,4 @@ func TestGetNews(t *testing.T) {
 		})
 	}
 
-}
-
-func parseTime(unixTime string) time.Time {
-	location, err := time.LoadLocation("Asia/Tokyo")
-	if err != nil {
-		log.Fatalf("Failed to load location: %s", err)
-	}
-	const layout = "2006-01-02 15:04:05 -0700"
-	res, err := time.Parse(layout, unixTime)
-	if err != nil {
-		log.Fatalf("Failed to parse time: %s", err)
-	}
-
-	return res.In(location)
 }
