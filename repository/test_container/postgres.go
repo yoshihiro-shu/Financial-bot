@@ -4,6 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/pressly/goose/v3"
 	"github.com/testcontainers/testcontainers-go"
@@ -78,13 +80,19 @@ func (c *postgresDBContainer) InitTestData(ctx context.Context) error {
 		return err
 	}
 
-	if err := goose.SetDialect("postgres"); err != nil {
-		return err
+	rootDir, _ := testutils.GetProjectRoot()
+
+	// SQLファイルを読み込む
+	file, err := os.ReadFile(rootDir + testDataSQLPath)
+	if err != nil {
+		return fmt.Errorf("failed to read SQL file: %v", err)
+
 	}
 
-	rootDir, _ := testutils.GetProjectRoot()
-	if err := goose.Up(db, rootDir+testDataSQLPath); err != nil {
-		return err
+	// SQLファイルを実行する
+	if _, err := db.Exec(string(file)); err != nil {
+		log.Fatalf("Failed to execute SQL: %v", err)
+		return fmt.Errorf("failed to execute SQL: %v", err)
 	}
 	return nil
 }
