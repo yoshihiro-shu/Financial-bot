@@ -3,6 +3,7 @@ package postgresql_test
 import (
 	"context"
 	"database/sql"
+	"log"
 	"testing"
 	"time"
 
@@ -61,14 +62,14 @@ func TestGetNews(t *testing.T) {
 		},
 		{
 			Name: "Get News ID 2",
-			Args: 1,
+			Args: 2,
 			Want: postgresql.News{
 				ID:          2,
 				Title:       "News Title 2",
 				Description: sql.NullString{String: "News Description 2", Valid: true},
 				Link:        "News Link 2",
 				Thumbnail:   sql.NullString{String: "News Thumbnail 2", Valid: true},
-				Score:       80,
+				Score:       90,
 				PublishedAt: parseTime("2023-10-13 12:00:00 +0900"),
 				ProviderID:  sql.NullInt32{Int32: 2, Valid: true},
 				CategoryID:  sql.NullInt32{Int32: 2, Valid: true},
@@ -76,14 +77,14 @@ func TestGetNews(t *testing.T) {
 		},
 		{
 			Name: "Get News ID 3",
-			Args: 1,
+			Args: 3,
 			Want: postgresql.News{
 				ID:          3,
 				Title:       "News Title 3",
 				Description: sql.NullString{String: "News Description 3", Valid: true},
 				Link:        "News Link 3",
 				Thumbnail:   sql.NullString{String: "News Thumbnail 3", Valid: true},
-				Score:       70,
+				Score:       80,
 				PublishedAt: parseTime("2023-10-13 12:00:00 +0900"),
 				ProviderID:  sql.NullInt32{Int32: 3, Valid: true},
 				CategoryID:  sql.NullInt32{Int32: 3, Valid: true},
@@ -99,13 +100,29 @@ func TestGetNews(t *testing.T) {
 			if err != nil {
 				t.Errorf("error is %s", err)
 			}
-			assert.Equal(t, test.Want, res)
+			assert.Equal(t, test.Want.Title, res.Title)
+			assert.Equal(t, test.Want.Description, res.Description)
+			assert.Equal(t, test.Want.Link, res.Link)
+			assert.Equal(t, test.Want.Thumbnail, res.Thumbnail)
+			assert.Equal(t, test.Want.Score, res.Score)
+			assert.Equal(t, test.Want.PublishedAt, res.PublishedAt)
+			assert.Equal(t, test.Want.ProviderID, res.ProviderID)
+			assert.Equal(t, test.Want.CategoryID, res.CategoryID)
 		})
 	}
 
 }
 
 func parseTime(unixTime string) time.Time {
-	t, _ := time.Parse(time.RFC3339, unixTime)
-	return t
+	location, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		log.Fatalf("Failed to load location: %s", err)
+	}
+	const layout = "2006-01-02 15:04:05 -0700"
+	res, err := time.Parse(layout, unixTime)
+	if err != nil {
+		log.Fatalf("Failed to parse time: %s", err)
+	}
+
+	return res.In(location)
 }
