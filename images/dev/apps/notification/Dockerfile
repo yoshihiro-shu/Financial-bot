@@ -12,6 +12,9 @@ RUN go mod download
 
 COPY apps/batch ./apps/notification
 COPY internal ./internal
+COPY entity ./entity
+COPY repository ./repository
+COPY usecase ./usecase
 
 EXPOSE 8000
 

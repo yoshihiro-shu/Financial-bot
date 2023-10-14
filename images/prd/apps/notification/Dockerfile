@@ -11,8 +11,13 @@ WORKDIR /build
 ADD go.mod .
 ADD go.sum .
 RUN go mod download
+
 COPY apps/notification ./apps/notification
 COPY internal ./internal
+COPY entity ./entity
+COPY repository ./repository
+COPY usecase ./usecase
+
 RUN go build -ldflags="-s -w" -o /app/notification /build/apps/notification/notification.go
 
 
