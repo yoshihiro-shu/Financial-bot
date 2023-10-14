@@ -12,6 +12,7 @@ import (
 )
 
 const migrationsDir = "/db/migrations"
+const testDataSQLPath = "/db/test/init.sql"
 
 type postgresDBContainer struct {
 	testcontainers.Container
@@ -66,6 +67,23 @@ func (c *postgresDBContainer) InitMigration(ctx context.Context) error {
 
 	rootDir, _ := testutils.GetProjectRoot()
 	if err := goose.Up(db, rootDir+migrationsDir); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *postgresDBContainer) InitTestData(ctx context.Context) error {
+	db, err := sql.Open("postgres", c.URI)
+	if err != nil {
+		return err
+	}
+
+	if err := goose.SetDialect("postgres"); err != nil {
+		return err
+	}
+
+	rootDir, _ := testutils.GetProjectRoot()
+	if err := goose.Up(db, rootDir+testDataSQLPath); err != nil {
 		return err
 	}
 	return nil

@@ -26,6 +26,11 @@ func TestStartPostgresContainer(t *testing.T) {
 		t.Errorf("error is %s", err)
 	}
 
+	err = container.InitTestData(ctx)
+	if err != nil {
+		t.Errorf("error is %s", err)
+	}
+
 	db, err := sql.Open("postgres", container.URI)
 	if err != nil {
 		t.Errorf("error is %s", err)
