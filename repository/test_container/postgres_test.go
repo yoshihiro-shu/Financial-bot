@@ -17,9 +17,14 @@ func TestStartPostgresContainer(t *testing.T) {
 	}
 	t.Cleanup(func() {
 		if err := container.Terminate(ctx); err != nil {
-			t.Fatalf("failed to terminate container: %s", err)
+			t.Errorf("failed to terminate container: %s", err)
 		}
 	})
+
+	err = container.InitMigration(ctx)
+	if err != nil {
+		t.Errorf("error is %s", err)
+	}
 
 	db, err := sql.Open("postgres", container.URI)
 	if err != nil {

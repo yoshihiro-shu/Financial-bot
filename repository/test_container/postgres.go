@@ -2,11 +2,16 @@ package test_container
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
+	"github.com/pressly/goose/v3"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
+	"github.com/yoshihiro-shu/financial-bot/internal/testutils"
 )
+
+const migrationsDir = "/db/migrations"
 
 type postgresDBContainer struct {
 	testcontainers.Container
@@ -47,4 +52,21 @@ func StartPostgresContainer(ctx context.Context) (*postgresDBContainer, error) {
 	uri := fmt.Sprintf("postgresql://postgres:password@%s:%s/postgres?sslmode=disable", hostIP, mappedPort.Port())
 
 	return &postgresDBContainer{Container: container, URI: uri}, nil
+}
+
+func (c *postgresDBContainer) InitMigration(ctx context.Context) error {
+	db, err := sql.Open("postgres", c.URI)
+	if err != nil {
+		return err
+	}
+
+	if err := goose.SetDialect("postgres"); err != nil {
+		return err
+	}
+
+	rootDir, _ := testutils.GetProjectRoot()
+	if err := goose.Up(db, rootDir+migrationsDir); err != nil {
+		return err
+	}
+	return nil
 }
