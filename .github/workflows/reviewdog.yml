@@ -12,4 +12,3 @@ jobs:
         with:
           filter_mode: diff_context
           fail_on_error: true
-          workdir: ./backend
