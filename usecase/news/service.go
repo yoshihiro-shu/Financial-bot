@@ -6,7 +6,7 @@ type Service struct {
 	Repository *repository.Queries
 }
 
-func NewService(repo *repository.Queries) *Service {
+func NewService(repo *repository.Queries) UseCase {
 	return &Service{
 		Repository: repo,
 	}
