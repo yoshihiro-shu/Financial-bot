@@ -11,7 +11,10 @@ import (
 
 func TestStartPostgresContainer(t *testing.T) {
 	ctx := context.Background()
-	container := test_container.Postgres
+	container, err := test_container.NewPostgresDBContainer(ctx)
+	if err != nil {
+		t.Errorf("failed to start container: %s", err)
+	}
 	t.Cleanup(func() {
 		if err := container.Terminate(ctx); err != nil {
 			t.Errorf("failed to terminate container: %s", err)
