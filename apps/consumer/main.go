@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/IBM/sarama"
 	"github.com/yoshihiro-shu/financial-bot/internal/logger"
 	"github.com/yoshihiro-shu/financial-bot/repository/appache_kafka/consumer"
 )
@@ -18,12 +17,7 @@ func main() {
 	group := "notifications"
 	topic := "news"
 
-	config := sarama.NewConfig()
-	config.Version = sarama.V3_5_0_0 // Kafkaのバージョンに合わせて変更
-	config.Consumer.Return.Errors = true
-	config.Consumer.Offsets.Initial = sarama.OffsetOldest
-
-	client, err := sarama.NewConsumerGroup(brokers, group, config)
+	client, err := consumer.NewConsumerGroupHandler(brokers, group)
 	if err != nil {
 		log.Fatalf("Error creating consumer group client: %v", err)
 	}

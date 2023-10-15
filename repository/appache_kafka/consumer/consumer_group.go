@@ -6,7 +6,9 @@ import (
 	"github.com/IBM/sarama"
 )
 
-type ConsumerGroupHandler struct{}
+type ConsumerGroupHandler struct {
+	sarama.ConsumerGroup
+}
 
 func (ConsumerGroupHandler) Setup(_ sarama.ConsumerGroupSession) error   { return nil }
 func (ConsumerGroupHandler) Cleanup(_ sarama.ConsumerGroupSession) error { return nil }
@@ -16,4 +18,19 @@ func (ConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim
 		sess.MarkMessage(msg, "")
 	}
 	return nil
+}
+
+func NewConsumerGroupHandler(addrs []string, groupName string) (*ConsumerGroupHandler, error) {
+	config := sarama.NewConfig()
+	config.Version = sarama.V3_5_0_0 // Kafkaのバージョンに合わせて変更
+	config.Consumer.Return.Errors = true
+	config.Consumer.Offsets.Initial = sarama.OffsetOldest
+
+	cg, err := sarama.NewConsumerGroup(addrs, groupName, config)
+	if err != nil {
+		return nil, err
+	}
+	return &ConsumerGroupHandler{
+		ConsumerGroup: cg,
+	}, nil
 }
