@@ -2,6 +2,8 @@
 
 金融に関する情報をLine Botで定期的に送信するサービス
 
+![DALL·E 2023-10-21 16 56 36 - Illustration of a user receiving notifications on their wide smartphone screen  Icons representing financial news, stocks, FX, and crypto assets hover](https://github.com/yoshihiro-shu/financial-bot/assets/84740493/d56c809c-40f8-4298-b47c-085feb60ccae)
+
 ## Design Docs
 
 [こちら](./docs/design_docs.md)
