@@ -1,8 +1,8 @@
+![DALL·E 2023-10-21 17 06 45 - Illustration of a wide smartphone screen with a simple and clear layout  A gentle cartoon character holds a small banner that reads 'Financial Tips', ](https://github.com/yoshihiro-shu/financial-bot/assets/84740493/cf7a4589-6210-444d-8101-1509a84a34ed)
+
 # financial-bot
 
 金融に関する情報をLine Botで定期的に送信するサービス
-
-![DALL·E 2023-10-21 17 06 45 - Illustration of a wide smartphone screen with a simple and clear layout  A gentle cartoon character holds a small banner that reads 'Financial Tips', ](https://github.com/yoshihiro-shu/financial-bot/assets/84740493/cf7a4589-6210-444d-8101-1509a84a34ed)
 
 ## Design Docs
 
