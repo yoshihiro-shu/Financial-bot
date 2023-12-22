@@ -1,12 +1,13 @@
 package notification_test
 
 import (
+	"os"
 	"testing"
 
 	"github.com/yoshihiro-shu/financial-bot/internal/notification"
 )
 
-const accessToken = "xxxxxxxxxxxxxxxxxxxxxxxxx"
+var accessToken = os.Getenv("LINE_NOTIFY_ACCESS_TOKEN")
 
 func TestSendMsg(t *testing.T) {
 	client := notification.NewNotification(accessToken)
