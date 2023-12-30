@@ -31,7 +31,7 @@ jobs:
           fi
       - name: 'Login to GitHub Container Registry'
         run: |
-          echo $CR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          echo ${{ env.CR_PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       -
         name: Build and push
         uses: docker/build-push-action@v4
