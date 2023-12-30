@@ -2,25 +2,40 @@
 
 ```mermaid
 erDiagram
-    News {
-        int id pk
-        string name
-        string description
-        string link
-        int score
-        time published_at
-        time created_at
-        time updated_at
-        int provider_id fk
-        int category_id fk
+    news {
+        INT id pk
+        VARCHAR(32) name
+        VARCHAR(254) description
+        VARCHAR(254) link
+        INT score
+        TIMESTAMP published_at
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+        INT provider_id fk
+        INT category_id fk
     }
-    Providers {
-        int id pk
-        string name
+    providers {
+        INT id pk
+        VARCHAR(32) name
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
-    Categories {
-        int id pk
-        string name
+    categories {
+        INT id pk
+        VARCHAR(32) name
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+    stocks {
+        INT id pk
+        VARCHAR(5) symbol
+        VARCHAR(32) name
+        FLOAT(2) open
+        FLOAT(2) close
+        FLOAT(2) high
+        FLOAT(2) low
+        INT volume
+        DATE date
     }
 
     News ||--o{ Providers : places
