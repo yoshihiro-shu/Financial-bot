@@ -23,27 +23,14 @@ func main() {
 	logger := logger.NewSlog()
 	group = "notifications"
 
-	config := kafka.DefaultConfig()
-	client, err := sarama.NewClient(brokers, config)
+	client, err := kafka.NewCounsumer(brokers, group)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Error creating consumer group client: %v", err))
 	}
 
-	consumeGroup, err := sarama.NewConsumerGroupFromClient(group, client)
-	if err != nil {
-		logger.Error(fmt.Sprintf("Error creating consumer group: %v", err))
-	}
-
-	ts, err := client.Topics()
+	topics, err := client.Topics()
 	if err != nil {
 		logger.Error(fmt.Sprintf("Error listing topics: %v", err))
-	}
-
-	topics := make([]string, len(ts)-1)
-	for i, t := range ts {
-		if t != "__consumer_offsets" {
-			topics[i] = t
-		}
 	}
 
 	ctx := context.Background()
@@ -57,7 +44,7 @@ func main() {
 
 	go func() {
 		for {
-			err := consumeGroup.Consume(ctx, topics, handler)
+			err := client.Group().Consume(ctx, topics, handler)
 			if err != nil {
 				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
 					return
