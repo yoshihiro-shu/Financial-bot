@@ -36,10 +36,31 @@
 ## 5. システムアーキテクチャ
 
 [diagram](https://app.diagrams.net/?src=about#G1u6J3T5kn-cB-85117u00gpe_KJAJez7F)
+<img width="432" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/7b2edc84-c5fc-4b24-9c29-79df19d40b97">
 
 ### ニュース送信のフロー
 
-<img width="432" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/7b2edc84-c5fc-4b24-9c29-79df19d40b97">
+```mermaid
+sequenceDiagram
+  participant APACHE Kafka
+  participant Server
+  participant KVS
+  participant DB
+  participant LINE API
+  participant User
+
+  APACHE Kafka->>Server: バッチ実行
+  Server->>KVS: ニュース取得リクエスト
+  KVS->>Server: ニュース取得レスポンス
+  alt if not in KVS
+    Server->>DB: ニュース取得リクエスト
+    DB->>Server: ニュース取得レスポンス
+    Server->>KVS: ニュース登録リクエスト
+    KVS->>Server: ニュース登録レスポンス
+  end
+  Server->>LINE API: メッセージ送信リクエスト
+  LINE API->>User: 通知
+```
 
 ### 定期実行バッチ
 
@@ -49,9 +70,12 @@
 
 ```mermaid
 sequenceDiagram
+  participant APACHE Kafka
   participant Server
   participant API
-  participant PostgreSQL
+  participant DB
+
+  APACHE Kafka->>Server: バッチ実行
   Server->>API: 株価取得APIにリクエスト
   API->>Server: 株価取得APIからレスポンス
   Server->>PostgreSQL: 株価情報をDBに登録
