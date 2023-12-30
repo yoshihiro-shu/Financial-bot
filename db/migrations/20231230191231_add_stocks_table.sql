@@ -11,9 +11,10 @@ CREATE TABLE stocks (
     high FLOAT(2) NOT NULL,
     low FLOAT(2) NOT NULL,
     volume INT NOT NULL,
-    date DATE
+    date DATE NOT NULL
 );
 -- +goose Down
 -- +goose StatementBegin
 SELECT 'down SQL query';
+DROP TABLE stocks;
 -- +goose StatementEnd

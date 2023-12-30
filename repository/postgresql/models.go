@@ -38,13 +38,13 @@ type Providers struct {
 }
 
 type Stocks struct {
-	ID     int32        `db:"id"`
-	Symbol string       `db:"symbol"`
-	Name   string       `db:"name"`
-	Open   float32      `db:"open"`
-	Close  float32      `db:"close"`
-	High   float32      `db:"high"`
-	Low    float32      `db:"low"`
-	Volume int32        `db:"volume"`
-	Date   sql.NullTime `db:"date"`
+	ID     int32     `db:"id"`
+	Symbol string    `db:"symbol"`
+	Name   string    `db:"name"`
+	Open   float32   `db:"open"`
+	Close  float32   `db:"close"`
+	High   float32   `db:"high"`
+	Low    float32   `db:"low"`
+	Volume int32     `db:"volume"`
+	Date   time.Time `db:"date"`
 }
