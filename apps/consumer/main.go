@@ -11,7 +11,7 @@ import (
 
 	"github.com/IBM/sarama"
 	"github.com/yoshihiro-shu/financial-bot/internal/logger"
-	"github.com/yoshihiro-shu/financial-bot/repository/appache_kafka/consumer"
+	kafka "github.com/yoshihiro-shu/financial-bot/repository/appache_kafka"
 )
 
 var (
@@ -23,7 +23,7 @@ func main() {
 	logger := logger.NewSlog()
 	group = "notifications"
 
-	config := consumer.DefaultConfig()
+	config := kafka.DefaultConfig()
 	client, err := sarama.NewClient(brokers, config)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Error creating consumer group client: %v", err))
@@ -47,7 +47,7 @@ func main() {
 	}
 
 	ctx := context.Background()
-	handler := consumer.ConsumerGroupHandler{}
+	handler := kafka.ConsumerGroupHandler{}
 
 	// シグナルを待機（Ctrl+Cで終了）
 	sigchan := make(chan os.Signal, 1)

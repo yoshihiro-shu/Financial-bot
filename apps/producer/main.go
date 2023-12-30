@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/yoshihiro-shu/financial-bot/repository/appache_kafka/producer"
+	kafka "github.com/yoshihiro-shu/financial-bot/repository/appache_kafka"
 )
 
 var (
@@ -14,7 +14,7 @@ var (
 )
 
 func main() {
-	producer, err := producer.NewProducer(brokers)
+	producer, err := kafka.NewProducer(brokers)
 	if err != nil {
 		log.Fatal(err)
 	}

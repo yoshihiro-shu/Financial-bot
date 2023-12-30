@@ -1,4 +1,4 @@
-package consumer
+package kafka
 
 import "github.com/IBM/sarama"
 
