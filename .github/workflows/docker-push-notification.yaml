@@ -1,0 +1,43 @@
+name: docker-app-push
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - "apps/notification/**"
+      - "entity/**"
+      - "internal/**"
+      - "repository/**"
+      - "usecase/**"
+      - "images/prd/apps/notification/Dockerfile"
+  release:
+    types: [published]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set Docker tag based on release name or commit hash
+        run: |
+          if [[ "${{ github.event.release.name }}" != "" ]]; then
+            echo "DOCKER_TAG=${{ github.event.release.name }}" >> $GITHUB_ENV
+          else
+            echo "DOCKER_TAG=${{ github.sha }}" >> $GITHUB_ENV
+          fi
+      - name: 'Login to GitHub Container Registry'
+        run: |
+          echo $CR_PAT | docker login ghcr.io -u <Your-GitHub-username> --password-stdin
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          file: ./images/prd/apps/notification/Dockerfile
+          push: true
+          tags: ghcr.io/yoshihiro-shu/financial-bot-notification:${{ env.DOCKER_TAG }}
