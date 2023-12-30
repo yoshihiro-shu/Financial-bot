@@ -41,11 +41,22 @@
 
 <img width="432" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/7b2edc84-c5fc-4b24-9c29-79df19d40b97">
 
-### 定期実行バッチ(CronJob)
+### 定期実行バッチ
 
 ニュースや銘柄などのデータ取得のバッチ
 
-<img width="451" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/081fefbe-8560-4fb1-a948-bb2218e9cc59">
+<!-- <img width="451" alt="image" src="https://github.com/yoshihiro-shu/financial-bot/assets/84740493/081fefbe-8560-4fb1-a948-bb2218e9cc59"> -->
+
+```mermaid
+sequenceDiagram
+  participant Server
+  participant API
+  participant PostgreSQL
+  Server->>API: 株価取得APIにリクエスト
+  API->>Server: 株価取得APIからレスポンス
+  Server->>PostgreSQL: 株価情報をDBに登録
+  PostgreSQL->>Server: DBレスポンス
+```
 
 ## 6. 主要な技術スタック
 
