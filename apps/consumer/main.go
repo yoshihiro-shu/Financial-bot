@@ -16,18 +16,36 @@ import (
 
 var (
 	brokers = strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
+	group   = os.Getenv("KAFKA_CONSUMER_GROUP")
 )
 
 func main() {
 	logger := logger.NewSlog()
-	group := "notifications"
-	topic := "news"
+	group = "notifications"
 
 	config := consumer.DefaultConfig()
-	client, err := consumer.NewConsumerClient(brokers, group, config)
+	client, err := sarama.NewClient(brokers, config)
 	if err != nil {
 		logger.Error(fmt.Sprintf("Error creating consumer group client: %v", err))
 	}
+
+	consumeGroup, err := sarama.NewConsumerGroupFromClient(group, client)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Error creating consumer group: %v", err))
+	}
+
+	ts, err := client.Topics()
+	if err != nil {
+		logger.Error(fmt.Sprintf("Error listing topics: %v", err))
+	}
+
+	topics := make([]string, len(ts)-1)
+	for i, t := range ts {
+		if t != "__consumer_offsets" {
+			topics[i] = t
+		}
+	}
+
 	ctx := context.Background()
 	handler := consumer.ConsumerGroupHandler{}
 
@@ -37,10 +55,9 @@ func main() {
 
 	logger.Info("start consuming")
 
-	// Consumer Groupでのメッセージの消費を開始
 	go func() {
 		for {
-			err := client.Consume(ctx, []string{topic}, handler)
+			err := consumeGroup.Consume(ctx, topics, handler)
 			if err != nil {
 				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
 					return

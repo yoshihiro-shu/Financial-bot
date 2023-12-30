@@ -15,8 +15,12 @@ func NewProducer(addrs []string) (*Producer, error) {
 	config.Producer.Return.Successes = true
 	config.Producer.Return.Errors = true
 	config.Version = sarama.V3_5_0_0
-
-	producer, err := sarama.NewSyncProducer(addrs, config)
+	client, err := sarama.NewClient(addrs, config)
+	if err != nil {
+		log.Fatalf("Failed to create client: %s", err)
+		return nil, err
+	}
+	producer, err := sarama.NewSyncProducerFromClient(client)
 	if err != nil {
 		log.Fatalf("Failed to create producer: %s", err)
 		return nil, err
