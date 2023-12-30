@@ -4,7 +4,7 @@ package main
 import (
 	"context"
 	"errors"
-	"log"
+	"fmt"
 	"os"
 	"os/signal"
 	"strings"
@@ -26,7 +26,7 @@ func main() {
 	config := consumer.DefaultConfig()
 	client, err := consumer.NewConsumerClient(brokers, group, config)
 	if err != nil {
-		log.Fatalf("Error creating consumer group client: %v", err)
+		logger.Error(fmt.Sprintf("Error creating consumer group client: %v", err))
 	}
 	ctx := context.Background()
 	handler := consumer.ConsumerGroupHandler{}
@@ -45,11 +45,12 @@ func main() {
 				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
 					return
 				}
-				log.Fatalf("Error from consumer: %v", err)
+				logger.Error(fmt.Sprintf("Error from consumer: %v", err))
 			}
 		}
 	}()
 
 	<-sigchan
+	logger.Info("Gracefully shutting down")
 	client.Close()
 }
