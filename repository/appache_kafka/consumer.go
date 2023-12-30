@@ -12,7 +12,7 @@ type Consumer struct {
 }
 
 func NewCounsumer(brokers []string, group string) (*Consumer, error) {
-	client, err := sarama.NewClient(brokers, DefaultConfig())
+	client, err := sarama.NewClient(brokers, consumerConfig())
 	if err != nil {
 		return nil, err
 	}

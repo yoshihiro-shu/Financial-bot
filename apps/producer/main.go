@@ -26,7 +26,7 @@ func main() {
 	topic := "news"
 	key := []byte("key")
 	value := []byte("value")
-	err = producer.SendMessages(topic, key, value)
+	err = producer.SendMessage(topic, key, value)
 	if err != nil {
 		log.Fatal(err)
 	}

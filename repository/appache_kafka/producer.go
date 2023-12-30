@@ -11,11 +11,7 @@ type Producer struct {
 }
 
 func NewProducer(addrs []string) (*Producer, error) {
-	config := sarama.NewConfig()
-	config.Producer.Return.Successes = true
-	config.Producer.Return.Errors = true
-	config.Version = sarama.V3_5_0_0
-	client, err := sarama.NewClient(addrs, config)
+	client, err := sarama.NewClient(addrs, producerConfig())
 	if err != nil {
 		log.Fatalf("Failed to create client: %s", err)
 		return nil, err
@@ -29,7 +25,7 @@ func NewProducer(addrs []string) (*Producer, error) {
 	return &Producer{producer}, nil
 }
 
-func (p *Producer) SendMessages(topic string, key, value []byte) error {
+func (p *Producer) SendMessage(topic string, key, value []byte) error {
 	msg := &sarama.ProducerMessage{
 		Topic: topic,
 		Key:   sarama.StringEncoder(key),
