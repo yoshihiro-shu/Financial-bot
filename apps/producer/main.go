@@ -3,12 +3,18 @@ package main
 
 import (
 	"log"
+	"os"
+	"strings"
 
 	"github.com/yoshihiro-shu/financial-bot/repository/appache_kafka/producer"
 )
 
+var (
+	brokers = strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
+)
+
 func main() {
-	producer, err := producer.NewProducer([]string{"localhost:9092"})
+	producer, err := producer.NewProducer(brokers)
 	if err != nil {
 		log.Fatal(err)
 	}
