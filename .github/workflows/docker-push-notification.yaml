@@ -21,6 +21,15 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       -
         name: Set Docker tag based on release name or commit hash
         run: |
@@ -29,19 +38,12 @@ jobs:
           else
             echo "DOCKER_TAG=${{ github.sha }}" >> $GITHUB_ENV
           fi
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build Docker Image
-        run: |
-          docker build \
-          --platform linux/amd64,linux/arm64 \
-          --tag ghcr.io/${{ github.actor }}/financial-bot-notification:${{ env.DOCKER_TAG }} \
-          -f images/prd/apps/notification/Dockerfile  \
-          .
-      - name: Push Docker Image
-        run: |
-          docker push ghcr.io/${{ github.actor }}/financial-bot-notification:${{ env.DOCKER_TAG }}
+          context: .
+          platforms: linux/amd64,linux/arm64
+          file: ./images/prd/apps/notification/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.actor }}/financial-bot-notification:${{ env.DOCKER_TAG }}
