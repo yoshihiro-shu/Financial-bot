@@ -35,6 +35,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build Docker Image
+      #   run: |
+      #     docker build --tag ghcr.io/${{ github.actor }}/financial-bot-notification:${{ env.DOCKER_TAG }} \
+      #     f images/prd/apps/notification/Dockerfile  \
+      #     .
       -
         name: Build and push
         uses: docker/build-push-action@v4
