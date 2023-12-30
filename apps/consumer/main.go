@@ -3,25 +3,31 @@ package main
 
 import (
 	"context"
+	"errors"
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 
+	"github.com/IBM/sarama"
 	"github.com/yoshihiro-shu/financial-bot/internal/logger"
 	"github.com/yoshihiro-shu/financial-bot/repository/appache_kafka/consumer"
 )
 
+var (
+	brokers = strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
+)
+
 func main() {
 	logger := logger.NewSlog()
-	brokers := []string{"localhost:9092"}
 	group := "notifications"
 	topic := "news"
 
-	client, err := consumer.NewConsumerGroupHandler(brokers, group)
+	config := consumer.DefaultConfig()
+	client, err := consumer.NewConsumerClient(brokers, group, config)
 	if err != nil {
 		log.Fatalf("Error creating consumer group client: %v", err)
 	}
-
 	ctx := context.Background()
 	handler := consumer.ConsumerGroupHandler{}
 
@@ -36,6 +42,9 @@ func main() {
 		for {
 			err := client.Consume(ctx, []string{topic}, handler)
 			if err != nil {
+				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
+					return
+				}
 				log.Fatalf("Error from consumer: %v", err)
 			}
 		}
