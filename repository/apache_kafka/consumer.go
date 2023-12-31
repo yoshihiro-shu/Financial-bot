@@ -34,23 +34,6 @@ func (c *Consumer) Close() error {
 	return c.client.Close()
 }
 
-func (c *Consumer) Topics() ([]string, error) {
-	ts, err := c.client.Topics()
-	if err != nil {
-		return nil, err
-	}
-	if len(ts) == 0 {
-		return nil, fmt.Errorf("no topics found")
-	}
-	topics := make([]string, len(ts)-1)
-	for i, t := range ts {
-		if t == "__consumer_offsets" {
-			topics = append(ts[:i], ts[i+1:]...)
-		}
-	}
-	return topics, nil
-}
-
 type ConsumerGroupHandler struct {
 	sarama.ConsumerGroup
 }
