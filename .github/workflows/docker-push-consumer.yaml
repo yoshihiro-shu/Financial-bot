@@ -3,13 +3,11 @@ on:
   push:
     branches:
       - 'main'
-    # paths:
-    #   - "apps/notification/**"
-    #   - "entity/**"
-    #   - "internal/**"
-    #   - "repository/**"
-    #   - "usecase/**"
-    #   - "images/prd/apps/notification/Dockerfile"
+    paths:
+      - "apps/consumer/**"
+      - "internal/logger/**"
+      - "repository/apache_kafka/**"
+      - "images/prd/apps/consumer/Dockerfile"
   release:
     types: [published]
 
