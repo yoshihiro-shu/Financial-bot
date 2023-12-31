@@ -12,10 +12,10 @@ ADD go.sum .
 RUN go mod download
 
 COPY apps/consumer ./apps/consumer
-COPY internal ./internal
-COPY entity ./entity
-COPY repository ./repository
-COPY usecase ./usecase
+COPY internal/logger ./internal/logger
+# COPY entity ./entity
+COPY repository/apache_kafka ./repository/apache_kafka
+# COPY usecase ./usecase
 
 RUN go build -ldflags="-s -w" -o /app/consumer /build/apps/consumer/*.go
 
