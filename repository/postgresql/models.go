@@ -16,6 +16,17 @@ type Categories struct {
 	UpdatedAt time.Time `db:"updated_at"`
 }
 
+type DailyStockPrices struct {
+	ID         int32     `db:"id"`
+	StockID    int32     `db:"stock_id"`
+	Date       time.Time `db:"date"`
+	OpenPrice  string    `db:"open_price"`
+	HighPrice  string    `db:"high_price"`
+	LowPrice   string    `db:"low_price"`
+	ClosePrice string    `db:"close_price"`
+	Volume     int64     `db:"volume"`
+}
+
 type News struct {
 	ID          int32          `db:"id"`
 	Title       string         `db:"title"`
@@ -38,13 +49,7 @@ type Providers struct {
 }
 
 type Stocks struct {
-	ID     int32     `db:"id"`
-	Symbol string    `db:"symbol"`
-	Name   string    `db:"name"`
-	Open   float32   `db:"open"`
-	Close  float32   `db:"close"`
-	High   float32   `db:"high"`
-	Low    float32   `db:"low"`
-	Volume int32     `db:"volume"`
-	Date   time.Time `db:"date"`
+	ID     int32  `db:"id"`
+	Symbol string `db:"symbol"`
+	Name   string `db:"name"`
 }
