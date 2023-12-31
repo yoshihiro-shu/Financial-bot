@@ -28,7 +28,6 @@ func NewServer(conf *sarama.Config) (*server, error) {
 }
 
 func (s *server) Run() {
-
 	client, err := kafka.NewCounsumer(brokers, group, nil)
 	if err != nil {
 		s.logger.Error(fmt.Sprintf("Error creating consumer group client: %v", err))
@@ -38,7 +37,7 @@ func (s *server) Run() {
 	ctx := context.Background()
 	go func() {
 		for {
-			err := client.Group().Consume(ctx, []string{topics}, kafka.ConsumerGroupHandler{})
+			err := client.Group().Consume(ctx, []string{topics}, consumerGroupHandler{})
 			if err != nil {
 				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
 					return
