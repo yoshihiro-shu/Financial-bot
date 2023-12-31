@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - 'main'
-    # paths:
-    #   - "apps/notification/**"
-    #   - "entity/**"
-    #   - "internal/**"
-    #   - "repository/**"
-    #   - "usecase/**"
-    #   - "images/prd/apps/notification/Dockerfile"
+    paths:
+      - "apps/notification/**"
+      - "entity/**"
+      - "internal/**"
+      - "repository/**"
+      - "usecase/**"
+      - "images/prd/apps/notification/Dockerfile"
   release:
     types: [published]
 
