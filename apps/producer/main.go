@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	kafka "github.com/yoshihiro-shu/financial-bot/repository/appache_kafka"
+	kafka "github.com/yoshihiro-shu/financial-bot/repository/apache_kafka"
 )
 
 var (

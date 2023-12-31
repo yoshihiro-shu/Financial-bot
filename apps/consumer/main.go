@@ -11,7 +11,7 @@ import (
 
 	"github.com/IBM/sarama"
 	"github.com/yoshihiro-shu/financial-bot/internal/logger"
-	kafka "github.com/yoshihiro-shu/financial-bot/repository/appache_kafka"
+	kafka "github.com/yoshihiro-shu/financial-bot/repository/apache_kafka"
 )
 
 var (
