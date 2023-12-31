@@ -1,7 +1,24 @@
 package finhub
 
-import "github.com/yoshihiro-shu/financial-bot/entity"
+import (
+	"context"
+	"time"
 
-func SymbolStocks(symbol string) ([]entity.Stock, error) {
-	return nil, nil
+	"github.com/yoshihiro-shu/financial-bot/entity"
+)
+
+func (c *client) SymbolStocks(symbol string) (*entity.Stock, error) {
+	res, _, err := c.Quote(context.Background()).Symbol(symbol).Execute()
+	if err != nil {
+		return nil, err
+	}
+	return &entity.Stock{
+		Symbol: symbol,
+		Open:   res.GetO(),
+		Close:  res.GetC(),
+		High:   res.GetH(),
+		Low:    res.GetL(),
+		Volume: 0,
+		Date:   time.Now(),
+	}, nil
 }
