@@ -2,7 +2,7 @@ package entity
 
 import "time"
 
-type Stocks struct {
+type Stock struct {
 	ID     int32     `json:"id"`
 	Symbol string    `json:"symbol"`
 	Name   string    `json:"name"`
