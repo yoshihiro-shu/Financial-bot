@@ -7,7 +7,8 @@ import (
 	"github.com/yoshihiro-shu/financial-bot/entity"
 )
 
-func (c *client) SymbolStocks(symbol string) (*entity.Stock, error) {
+// Get real-time quote data for US stocks.
+func (c *client) StockPriceBySymbol(symbol string) (*entity.Stock, error) {
 	res, _, err := c.Quote(context.Background()).Symbol(symbol).Execute()
 	if err != nil {
 		return nil, err

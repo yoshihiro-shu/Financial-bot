@@ -9,9 +9,9 @@ import (
 
 var apiKey = os.Getenv("FINHUB_API_KEY")
 
-func TestSymbolStocks(t *testing.T) {
+func TestStockPriceBySymbol(t *testing.T) {
 	client := finhub.NewClient(apiKey)
-	stock, err := client.SymbolStocks("AAPL")
+	stock, err := client.StockPriceBySymbol("AAPL")
 	if err != nil {
 		t.Errorf("error is %s", err)
 	}
