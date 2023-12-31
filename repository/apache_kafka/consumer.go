@@ -11,8 +11,11 @@ type Consumer struct {
 	group  sarama.ConsumerGroup
 }
 
-func NewCounsumer(brokers []string, group string) (*Consumer, error) {
-	client, err := sarama.NewClient(brokers, consumerConfig())
+func NewCounsumer(brokers, group string, conf *sarama.Config) (*Consumer, error) {
+	if conf == nil {
+		conf = consumerConfig()
+	}
+	client, err := sarama.NewClient([]string{brokers}, conf)
 	if err != nil {
 		return nil, err
 	}
