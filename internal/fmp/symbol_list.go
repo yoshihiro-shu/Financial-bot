@@ -19,8 +19,8 @@ type symbol struct {
 
 // A list of all traded and non-traded stocks.
 // https://site.financialmodelingprep.com/developer/docs/stock-market-quote-free-api/?direct=true
-func GetSymbolList(apiKey string) ([]symbol, error) {
-	url := "https://financialmodelingprep.com/api/v3/stock/list?apikey=" + apiKey
+func (c *client) GetSymbolList() ([]symbol, error) {
+	url := "https://financialmodelingprep.com/api/v3/stock/list?apikey=" + c.apiKey
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
