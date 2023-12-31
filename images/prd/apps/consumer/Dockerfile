@@ -17,7 +17,7 @@ COPY entity ./entity
 COPY repository ./repository
 COPY usecase ./usecase
 
-RUN go build -ldflags="-s -w" -o /app/consumer /build/apps/consumer/main.go
+RUN go build -ldflags="-s -w" -o /app/consumer /build/apps/consumer/*.go
 
 
 FROM scratch
