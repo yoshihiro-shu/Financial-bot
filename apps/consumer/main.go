@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log/slog"
 	"os"
 	"os/signal"
 	"strings"
@@ -16,12 +17,16 @@ import (
 
 var (
 	brokers = strings.Split(os.Getenv("KAFKA_BROKERS"), ",")
-	group   = os.Getenv("KAFKA_CONSUMER_GROUP")
+	// group   = os.Getenv("KAFKA_CONSUMER_GROUP")
+	group = "notifications"
 )
 
 func main() {
 	logger := logger.NewSlog()
-	group = "notifications"
+	run(logger)
+}
+
+func run(logger *slog.Logger) {
 
 	client, err := kafka.NewCounsumer(brokers, group)
 	if err != nil {
@@ -33,18 +38,16 @@ func main() {
 		logger.Error(fmt.Sprintf("Error listing topics: %v", err))
 	}
 
-	ctx := context.Background()
-	handler := kafka.ConsumerGroupHandler{}
-
 	// シグナルを待機（Ctrl+Cで終了）
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, os.Interrupt)
 
 	logger.Info("start consuming")
 
+	ctx := context.Background()
 	go func() {
 		for {
-			err := client.Group().Consume(ctx, topics, handler)
+			err := client.Group().Consume(ctx, topics, kafka.ConsumerGroupHandler{})
 			if err != nil {
 				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
 					return
