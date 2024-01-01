@@ -10,6 +10,9 @@ import (
 var apiKey = os.Getenv("FINHUB_API_KEY")
 
 func TestStockPriceBySymbol(t *testing.T) {
+	if apiKey == "" {
+		t.Skip()
+	}
 	client := finhub.NewClient(apiKey)
 	stock, err := client.StockPriceBySymbol("AAPL")
 	if err != nil {

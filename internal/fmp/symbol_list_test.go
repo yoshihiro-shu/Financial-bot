@@ -10,6 +10,9 @@ import (
 var apiKey = os.Getenv("FMP_API_KEY")
 
 func TestGetSymbolList(t *testing.T) {
+	if apiKey == "" {
+		t.Skip()
+	}
 	client := fmp.NewClient(apiKey)
 	symbolList, err := client.GetSymbolList()
 	if err != nil {
