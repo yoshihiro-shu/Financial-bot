@@ -1,4 +1,4 @@
-package main
+package kafka
 
 import (
 	"fmt"
@@ -7,13 +7,13 @@ import (
 	"github.com/IBM/sarama"
 )
 
-type consumerGroupHandler struct {
+type ConsumerGroupHandler struct {
 	sarama.ConsumerGroup
 }
 
-func (consumerGroupHandler) Setup(_ sarama.ConsumerGroupSession) error   { return nil }
-func (consumerGroupHandler) Cleanup(_ sarama.ConsumerGroupSession) error { return nil }
-func (consumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
+func (ConsumerGroupHandler) Setup(_ sarama.ConsumerGroupSession) error   { return nil }
+func (ConsumerGroupHandler) Cleanup(_ sarama.ConsumerGroupSession) error { return nil }
+func (ConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
 		switch msg.Topic {
 		case "request":
@@ -26,11 +26,12 @@ func (consumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim
 	return nil
 }
 
-func handleRequest(msg *sarama.ConsumerMessage) {
+func handleRequest(msg *sarama.ConsumerMessage) (*http.Response, error) {
 	switch string(msg.Key) {
 	case http.MethodGet:
-		http.Get(string(msg.Value))
+		return http.DefaultClient.Get(string(string(msg.Value)))
 	}
+	return nil, nil
 }
 
 func handleDefault(msg *sarama.ConsumerMessage) {
