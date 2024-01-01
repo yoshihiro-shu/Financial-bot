@@ -5,3 +5,7 @@ INSERT INTO providers (
   $1
 )
 RETURNING *;
+
+-- name: ListProvider :many
+SELECT * FROM providers
+ORDER BY id;
