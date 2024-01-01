@@ -16,6 +16,9 @@ var apiKey = os.Getenv("FINHUB_API_KEY")
 
 // TODO REFACTOR
 func TestMarketNews(t *testing.T) {
+	if apiKey == "" {
+		t.Skip()
+	}
 	db, err := sql.Open("postgres", "host=127.0.0.1 port=5432 user=postgres password=password dbname=test sslmode=disable")
 	assert.Nil(t, err)
 	defer db.Close()
