@@ -2,6 +2,10 @@
 SELECT * FROM news
 WHERE id = $1 LIMIT 1;
 
+-- name: GetNewsByTitle :one
+SELECT 1 FROM news
+WHERE title = $1 LIMIT 1;
+
 -- name: ListNews :many
 SELECT * FROM news
 ORDER BY published_at;

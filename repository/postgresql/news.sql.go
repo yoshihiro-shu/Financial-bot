@@ -93,6 +93,18 @@ func (q *Queries) GetNews(ctx context.Context, id int32) (News, error) {
 	return i, err
 }
 
+const getNewsByTitle = `-- name: GetNewsByTitle :one
+SELECT 1 FROM news
+WHERE title = $1 LIMIT 1
+`
+
+func (q *Queries) GetNewsByTitle(ctx context.Context, title string) (int32, error) {
+	row := q.db.QueryRowContext(ctx, getNewsByTitle, title)
+	var column_1 int32
+	err := row.Scan(&column_1)
+	return column_1, err
+}
+
 const listNews = `-- name: ListNews :many
 SELECT id, title, description, link, thumbnail, score, published_at, created_at, updated_at, provider_id, category_id FROM news
 ORDER BY published_at
