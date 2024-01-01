@@ -37,7 +37,7 @@ func (s *server) Run() {
 	ctx := context.Background()
 	go func() {
 		for {
-			err := client.Group().Consume(ctx, []string{topics}, consumerGroupHandler{})
+			err := client.Group().Consume(ctx, []string{topics}, kafka.ConsumerGroupHandler{})
 			if err != nil {
 				if errors.Is(err, sarama.ErrClosedConsumerGroup) {
 					return

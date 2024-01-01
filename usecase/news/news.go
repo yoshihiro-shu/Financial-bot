@@ -3,10 +3,81 @@ package news
 import (
 	"context"
 	"database/sql"
+	"time"
 
 	"github.com/yoshihiro-shu/financial-bot/entity"
+	"github.com/yoshihiro-shu/financial-bot/internal/finhub"
+
 	repository "github.com/yoshihiro-shu/financial-bot/repository/postgresql"
 )
+
+func (svc *Service) MarketNews(ctx context.Context, apiKey string) error {
+	client := finhub.NewClient(apiKey)
+	res, err := client.GetMarketNews()
+	if err != nil {
+		return err
+	}
+
+	categories := make(map[string]int32)
+	c, err := svc.Repository.ListCategory(ctx)
+	if err != nil {
+		return err
+	}
+	for _, v := range c {
+		categories[v.Name] = v.ID
+	}
+
+	providers := make(map[string]int32)
+	p, err := svc.Repository.ListProvider(ctx)
+	if err != nil {
+		return err
+	}
+	for _, v := range p {
+		providers[v.Name] = v.ID
+	}
+
+	now := time.Now()
+	for _, v := range res {
+		if _, ok := categories[v.GetCategory()]; !ok {
+			category, err := svc.Repository.CreateCategory(ctx, v.GetCategory())
+			if err != nil {
+				return err
+			}
+			categories[v.GetCategory()] = category.ID
+
+		}
+		if _, ok := providers[v.GetSource()]; !ok {
+			provider, err := svc.Repository.CreateProvider(ctx, v.GetSource())
+			if err != nil {
+				return err
+			}
+			providers[v.GetSource()] = provider.ID
+		}
+
+		// すでに存在している場合はスキップ
+		_, err := svc.Repository.GetNewsByTitle(ctx, v.GetHeadline())
+		if err != sql.ErrNoRows {
+			if err != nil {
+				return err
+			}
+			continue
+		}
+		_, err = svc.CreateNews(ctx, entity.News{
+			Title:       v.GetHeadline(),
+			Description: v.GetSummary(),
+			Link:        v.GetUrl(),
+			Thumbnail:   v.GetImage(),
+
+			PublishedAt: time.Unix(int64(v.GetDatetime()), 0),
+			CreatedAt:   now,
+			UpdatedAt:   now,
+		}, providers[v.GetSource()], categories[v.GetCategory()])
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
 
 func (svc *Service) CreateNews(ctx context.Context, news entity.News, providerId int32, categoryId int32) (*entity.News, error) {
 	res, err := svc.Repository.CreateNews(ctx, repository.CreateNewsParams{

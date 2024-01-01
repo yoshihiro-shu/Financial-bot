@@ -10,6 +10,9 @@ import (
 var accessToken = os.Getenv("LINE_NOTIFY_ACCESS_TOKEN")
 
 func TestSendMsg(t *testing.T) {
+	if accessToken == "" {
+		t.Skip()
+	}
 	client := notification.NewNotification(accessToken)
 
 	tests := []struct {
