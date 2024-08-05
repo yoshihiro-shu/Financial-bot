@@ -81,7 +81,7 @@ services:
       - financial-bot-network
 
   kafka:
-    image: docker.io/bitnami/kafka:3.7
+    image: docker.io/bitnami/kafka:3.8
     ports:
       - "9092:9092"
     volumes:
