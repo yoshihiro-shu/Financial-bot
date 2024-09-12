@@ -1,7 +1,7 @@
 services:
 
   etcd1:
-    image: bitnami/etcd:3.5.13
+    image: bitnami/etcd:3.5.16
     restart: always
     environment:
       - ETCD_NAME=etcd1
@@ -22,7 +22,7 @@ services:
       - financial-bot-network
 
   etcd2:
-    image: bitnami/etcd:3.5.13
+    image: bitnami/etcd:3.5.16
     restart: always
     environment:
       - ETCD_NAME=etcd2
