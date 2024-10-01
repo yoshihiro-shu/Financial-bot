@@ -1,4 +1,4 @@
-FROM golang:1.22.2-alpine3.18 AS builder
+FROM golang:1.22.3-alpine3.18 AS builder
 LABEL org.opencontainers.image.source https://github.com/yoshihiro-shu/financial-bot
 
 ENV CGO_ENABLED 0
